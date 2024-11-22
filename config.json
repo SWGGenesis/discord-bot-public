@@ -1,0 +1,18 @@
+{
+    "SWG": {
+        "LoginAddress": "connect.swggenesis.com",
+        "LoginPort": 44453,
+        "Username": "username_of_your_chatbot_account",
+        "Password": "password_of_your_chatbot_account",
+        "Character": "SWG_character_name_of_your_chatbot",
+        "ChatRoom": "path.to.your.chatroom",
+    },
+    "Discord": {
+        "BotName": "Name_of_your_discord_bot_in_developer_portal",
+        "BotToken": "Token_pasted_from_your_Discord_Developer_Portal",
+        "ServerName": "SWG Genesis",
+        "ChatChannel": "Discord_text_channel_name_where_your_chatbot_will_post",
+        "NotificationChannel": "Discord_text_channel_name_where_your_chatbot_will_post_server_status_notifications",
+        "NotificationMentionRole": "Role_you_want_tagged_on_Server_status_notifications",
+    }
+}
