@@ -10,7 +10,7 @@
     "Discord": {
         "BotName": "Name_of_your_discord_bot_in_developer_portal",
         "BotToken": "Token_pasted_from_your_Discord_Developer_Portal",
-        "ServerName": "SWG Genesis",
+        "ServerName": "Name of Your Discord Server",
         "ChatChannel": "Discord_text_channel_name_where_your_chatbot_will_post",
         "NotificationChannel": "Discord_text_channel_name_where_your_chatbot_will_post_server_status_notifications",
         "NotificationMentionRole": "Role_you_want_tagged_on_Server_status_notifications",
