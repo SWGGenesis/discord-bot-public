@@ -26,6 +26,7 @@ function discordBot() {
     });
 
     client.on('message', async (message) => {
+        console.log(`[DEBUG] Received message from ${message.author.tag} in ${message.channel.name}: ${message.content}`);
         if (message.author.bot) return; // Ignore bot messages
 
         if (message.content.startsWith('!server')) {
@@ -43,19 +44,23 @@ function discordBot() {
         }
 
         if (!server || !chat) {
-            console.log("Server or chat channel is undefined.");
+            console.log("[DEBUG] Server or chat channel is undefined.");
             return;
         }
 
-        if (message.channel.name !== config.Discord.ChatChannel) return;
+        if (message.channel.name === config.Discord.NotificationChannel) {
+            console.log(`[DEBUG] Forwarding message from ${message.author.tag} to ${config.Discord.ChatChannel}`);
+            chat.send(`**${message.author.username}:** ${message.content}`);
+        }
 
-        const member = server.members.get(message.author.id);
-        if (!member) {
-            console.log(`Member not found for user ${message.author.id}`);
+        if (message.channel.name !== config.Discord.ChatChannel) {
+            console.log(`[DEBUG] Ignoring message from ${message.channel.name}`);
             return;
         }
 
-        SWG.sendChat(message.cleanContent, member.displayName);
+        const memberName = message.member ? message.member.displayName : message.author.username;
+        console.log(`[DEBUG] Sending to SWG: ${message.cleanContent} from ${memberName}`);
+        SWG.sendChat(message.cleanContent, memberName);
     });
 
     client.on('disconnect', (event) => {
@@ -86,12 +91,12 @@ SWG.reconnected = function() {
 }
 
 SWG.recvChat = function(message, player) {
-    console.log(`Sending chat to Discord: ${player}: ${message}`);
+    console.log(`[DEBUG] Sending chat to Discord: ${player}: ${message}`);
     if (chat) chat.send(`**${player}:**  ${message}`);
 }
 
 SWG.recvTell = function(from, message) {
-    console.log(`Received tell from: ${from}: ${message}`);
+    console.log(`[DEBUG] Received tell from: ${from}: ${message}`);
     if (from !== config.SWG.Character) SWG.sendTell(from, "Hi!");
 }
 
